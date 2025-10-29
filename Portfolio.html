@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Portfolio | Mark Louei Joven</title>
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- Icons -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    rel="stylesheet"
+  />
+
+  <style>
+    body {
+      scroll-behavior: smooth;
+      font-family: "Poppins", sans-serif;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .navbar {
+      transition: background-color 0.3s;
+    }
+    .navbar.scrolled {
+      background-color: var(--bs-dark) !important;
+    }
+
+    #hero {
+      height: 100vh;
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)),
+        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1500&q=80')
+        center/cover no-repeat;
+      color: white;
+      display: flex;
+      align-items: center;
+      text-align: center;
+    }
+
+    #hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+    }
+
+    #about img {
+      border-radius: 1rem;
+    }
+
+    .progress-bar {
+      background-color: #0d6efd;
+    }
+
+    .project-card {
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .filter-btn.active {
+      background-color: #0d6efd;
+      color: white;
+    }
+
+    footer {
+      background-color: #212529;
+      color: white;
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+      background-color: #121212;
+      color: #f1f1f1;
+    }
+
+    body.dark-mode .navbar.scrolled {
+      background-color: #000 !important;
+    }
+
+    body.dark-mode .card {
+      background-color: #1e1e1e;
+      color: #f1f1f1;
+    }
+
+    body.dark-mode footer {
+      background-color: #000;
+    }
+
+    .dark-toggle {
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-transparent">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">MyPortfolio</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="#hero">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item ms-3">
+            <i id="darkToggle" class="bi bi-moon-stars-fill dark-toggle"></i>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section id="hero">
+    <div class="container">
+      <h1>Hello, I'm <span class="text-primary">Mark Louei Joven</span></h1>
+      <p class="lead">Technical Support | Web Developer | Freelancer</p>
+      <a href="#projects" class="btn btn-primary mt-3">View My Work</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="py-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-5">
+          <img src="https://via.placeholder.com/450x450" class="img-fluid" alt="Profile" />
+        </div>
+        <div class="col-md-7">
+          <h2>About Me</h2>
+          <p>
+            I'm a passionate web developer and technical support specialist with
+            experience in creating efficient, user-friendly solutions. I enjoy
+            blending technology and creativity to build digital experiences that
+            stand out.
+          </p>
+          <p>
+            Skilled in HTML, CSS, JavaScript, and troubleshooting, I’m always
+            eager to learn and improve my craft.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="bg-light py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">My Skills</h2>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <h6>HTML</h6>
+          <div class="progress">
+            <div class="progress-bar" style="width: 95%">95%</div>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <h6>CSS / Bootstrap</h6>
+          <div class="progress">
+            <div class="progress-bar" style="width: 90%">90%</div>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <h6>JavaScript</h6>
+          <div class="progress">
+            <div class="progress-bar" style="width: 80%">80%</div>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <h6>Technical Support</h6>
+          <div class="progress">
+            <div class="progress-bar" style="width: 95%">95%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">Projects</h2>
+
+      <!-- Filter Buttons -->
+      <div class="text-center mb-4">
+        <button class="btn btn-outline-primary filter-btn active" data-filter="all">All</button>
+        <button class="btn btn-outline-primary filter-btn" data-filter="web">Web</button>
+        <button class="btn btn-outline-primary filter-btn" data-filter="app">App</button>
+        <button class="btn btn-outline-primary filter-btn" data-filter="design">Design</button>
+      </div>
+
+      <!-- Project Grid -->
+      <div class="row g-4">
+        <div class="col-md-4 project-card" data-category="web">
+          <div class="card shadow-sm">
+            <img src="https://via.placeholder.com/600x400" class="card-img-top" alt="Web Project" />
+            <div class="card-body">
+              <h5 class="card-title">Portfolio Website</h5>
+              <p class="card-text">A responsive website built with HTML, CSS, and Bootstrap.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 project-card" data-category="app">
+          <div class="card shadow-sm">
+            <img src="https://via.placeholder.com/600x400" class="card-img-top" alt="App Project" />
+            <div class="card-body">
+              <h5 class="card-title">Attendance Tracker</h5>
+              <p class="card-text">A mobile-friendly employee attendance app.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 project-card" data-category="design">
+          <div class="card shadow-sm">
+            <img src="https://via.placeholder.com/600x400" class="card-img-top" alt="Design Project" />
+            <div class="card-body">
+              <h5 class="card-title">Landing Page UI</h5>
+              <p class="card-text">A clean landing page design for a startup company.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 project-card" data-category="web">
+          <div class="card shadow-sm">
+            <img src="https://via.placeholder.com/600x400" class="card-img-top" alt="Web Project 2" />
+            <div class="card-body">
+              <h5 class="card-title">E-commerce Dashboard</h5>
+              <p class="card-text">Built using Bootstrap and chart libraries for analytics.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="bg-light py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">Contact Me</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <form>
+            <div class="mb-3">
+              <label for="name" class="form-label">Your Name</label>
+              <input type="text" class="form-control" id="name" required />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="email" required />
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Message</label>
+              <textarea class="form-control" id="message" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Mark Louei Joven | All Rights Reserved</p>
+    <div class="social-links mt-2">
+      <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+      <a href="#" class="text-white me-3"><i class="bi bi-linkedin"></i></a>
+      <a href="#" class="text-white"><i class="bi bi-github"></i></a>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Navbar scroll effect
+    window.addEventListener("scroll", function () {
+      const navbar = document.querySelector(".navbar");
+      navbar.classList.toggle("scrolled", window.scrollY > 50);
+    });
+
+    // Dark mode toggle
+    const toggle = document.getElementById("darkToggle");
+    const body = document.body;
+
+    // Load saved mode
+    if (localStorage.getItem("darkMode") === "true") {
+      body.classList.add("dark-mode");
+      toggle.classList.replace("bi-moon-stars-fill", "bi-brightness-high-fill");
+    }
+
+    toggle.addEventListener("click", () => {
+      body.classList.toggle("dark-mode");
+      const darkModeEnabled = body.classList.contains("dark-mode");
+
+      toggle.classList.toggle("bi-brightness-high-fill", darkModeEnabled);
+      toggle.classList.toggle("bi-moon-stars-fill", !darkModeEnabled);
+
+      localStorage.setItem("darkMode", darkModeEnabled);
+    });
+
+    // Project Filter
+    const filterBtns = document.querySelectorAll(".filter-btn");
+    const projectCards = document.querySelectorAll(".project-card");
+
+    filterBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        // Active button style
+        filterBtns.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        const filter = btn.dataset.filter;
+
+        projectCards.forEach((card) => {
+          card.style.display =
+            filter === "all" || card.dataset.category === filter ? "block" : "none";
+        });
+      });
+    });
+  </script>
+</body>
+</html>
