@@ -1,0 +1,92 @@
+  <style>
+    body {
+      scroll-behavior: smooth;
+      font-family: "Poppins", sans-serif;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .navbar {
+      transition: background-color 0.3s;
+    }
+    .navbar.scrolled {
+      background-color: var(--bs-dark) !important;
+    }
+
+    #hero {
+      height: 100vh;
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6)),
+        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1500&q=80')
+        center/cover no-repeat;
+      color: white;
+      display: flex;
+      align-items: center;
+      text-align: center;
+    }
+
+    #hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+    }
+
+    #about img {
+      border-radius: 1rem;
+    }
+
+    .progress-bar {
+      background-color: #0d6efd;
+    }
+
+    .project-card {
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .filter-btn.active {
+      background-color: #0d6efd;
+      color: white;
+    }
+
+    footer {
+      background-color: #212529;
+      color: white;
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+      background-color: #121212;
+      color: #f1f1f1;
+    }
+
+    body.dark-mode .navbar.scrolled {
+      background-color: #000 !important;
+    }
+
+    body.dark-mode .card {
+      background-color: #1e1e1e;
+      color: #f1f1f1;
+    }
+
+    body.dark-mode footer {
+      background-color: #000;
+    }
+
+    .dark-toggle {
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: white;
+    }
+
+    body.dark-mode #skills h2 {
+    color: #0c0303; /* or pick your preferred color */
+    }
+
+    body.dark-mode h6{
+  color: #0c0303; /* soft light-blue, good contrast on dark background */
+}
+
+
+  </style>

@@ -17,6 +17,7 @@
   />
 
   <style>
+
     body {
       scroll-behavior: smooth;
       font-family: "Poppins", sans-serif;
@@ -105,13 +106,18 @@
     body.dark-mode h6{
   color: #0c0303; /* soft light-blue, good contrast on dark background */
 }
+
+#skills .progress-bar {
+  width: 0;
+  transition: width 1.5s ease;
+}
   </style>
 </head>
 <body>
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-transparent">
     <div class="container">
-      <a class="navbar-brand fw-bold" href="#">MyPortfolio</a>
+      <a class="navbar-brand fw-bold" href="#">Portfolio</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -154,7 +160,7 @@
         <div class="col-md-7">
           <h2>About Me</h2>
           <p>
-            I'm a passionate web developer and technical support specialist with
+            I'm a passionate web developer and technical support with
             experience in creating efficient, user-friendly solutions. I enjoy
             blending technology and creativity to build digital experiences that
             stand out.
@@ -176,25 +182,25 @@
         <div class="col-md-6 mb-3">
           <h6>HTML</h6>
           <div class="progress">
-            <div class="progress-bar" style="width: 95%">95%</div>
+            <div class="progress-bar" data-speed="2s" style="width: 95%">95%</div>
           </div>
         </div>
         <div class="col-md-6 mb-3">
           <h6>CSS / Bootstrap</h6>
           <div class="progress">
-            <div class="progress-bar" style="width: 90%">90%</div>
+            <div class="progress-bar" data-speed="2s" style="width: 90%">90%</div>
           </div>
         </div>
         <div class="col-md-6 mb-3">
           <h6>JavaScript</h6>
           <div class="progress">
-            <div class="progress-bar" style="width: 80%">80%</div>
+            <div class="progress-bar" data-speed="2s" style="width: 80%">80%</div>
           </div>
         </div>
         <div class="col-md-6 mb-3">
           <h6>Technical Support</h6>
           <div class="progress">
-            <div class="progress-bar" style="width: 95%">95%</div>
+            <div class="progress-bar" data-speed="2s" style="width: 95%">95%</div>
           </div>
         </div>
       </div>
@@ -308,6 +314,30 @@
     const toggle = document.getElementById("darkToggle");
     const body = document.body;
 
+    // 🎯 Animated Progress Bars
+  const progressBars = document.querySelectorAll("#skills .progress-bar");
+  const skillsSection = document.querySelector("#skills");
+  let skillsAnimated = false;
+
+  window.addEventListener("scroll", () => {
+    const sectionTop = skillsSection.offsetTop;
+    const sectionHeight = skillsSection.offsetHeight;
+    const scrollPosition = window.scrollY + window.innerHeight;
+
+    // Trigger once when section comes into view
+    if (!skillsAnimated && scrollPosition > sectionTop + sectionHeight / 3) {
+      progressBars.forEach((bar) => {
+        const value = bar.getAttribute("style").match(/\d+/)[0];
+        bar.style.width = "0%";
+        setTimeout(() => {
+          bar.style.width = value + "%";
+          bar.style.transition = "width 2s ease";
+        }, 200);
+      });
+      skillsAnimated = true;
+    }
+  });
+  
     // Load saved mode
     if (localStorage.getItem("darkMode") === "true") {
       body.classList.add("dark-mode");
@@ -342,6 +372,8 @@
         });
       });
     });
+    
   </script>
+
 </body>
 </html>
