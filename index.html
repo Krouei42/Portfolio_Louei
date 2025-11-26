@@ -61,7 +61,8 @@
     }
 
     #exp1 p{
-      text-indent: 2%
+      text-indent: 2%;
+      line-height: 2;
     }
     .progress-bar {
       background-color: #0d6efd;
@@ -119,6 +120,10 @@
   color: #0c0303; 
 }
 
+body.dark-mode #contact {
+  color: #0c0303; 
+}
+
 #skills .progress-bar {
   width: 0;
   transition: width 1.5s ease;
@@ -139,16 +144,17 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto align-items-center">
+        <ul class="navbar-nav mx-auto align-items-center">
           <li class="nav-item"><a class="nav-link" href="#hero">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
           <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Certificates</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
           <li class="nav-item ms-3">
-            <i id="darkToggle" class="bi bi-moon-stars-fill dark-toggle"></i>
+            
           </li>
         </ul>
+        <i id="darkToggle" class="bi bi-moon-stars-fill dark-toggle"></i>
       </div>
     </div>
   </nav>
