@@ -4,754 +4,101 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mark Louei Joven — Front End Developer & Technical Support</title>
+  <link rel="stylesheet" href="styledesign.css">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Barlow+Condensed:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:         #0d0d0c;
-      --bg-2:       #131311;
-      --bg-3:       #1a1a17;
-      --border:     rgba(255,255,255,0.07);
-      --border-mid: rgba(255,255,255,0.12);
-      --gold:       #b8a96a;
-      --gold-dim:   #7a6f45;
-      --text-hi:    #f0ece0;
-      --text-mid:   #9e9a8e;
-      --text-lo:    #4a4a46;
-      --serif:      'Cormorant Garamond', Georgia, serif;
-      --sans:       'DM Sans', system-ui, sans-serif;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text-mid);
-      font-family: var(--sans);
-      font-weight: 300;
-      font-size: 15px;
-      line-height: 1.75;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ─── NOISE TEXTURE OVERLAY ─── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.4;
-    }
-
-    /* ─── LAYOUT ─── */
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 32px;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* ─── NAVIGATION ─── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(13,13,12,0.9);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    nav .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 60px;
-    }
-
-    .nav-logo {
-      font-family: var(--serif);
-      font-size: 18px;
-      font-weight: 400;
-      color: var(--text-hi);
-      text-decoration: none;
-      letter-spacing: 0.02em;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-lo);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--text-mid); }
-
-    .nav-cta {
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gold);
-      text-decoration: none;
-      border: 1px solid var(--gold-dim);
-      padding: 7px 16px;
-      border-radius: 2px;
-      transition: all 0.2s;
-    }
-    .nav-cta:hover { background: rgba(184,169,106,0.08); }
-
-    /* ─── HAMBURGER ─── */
-    .nav-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
-    }
-    .nav-toggle span {
-      display: block;
-      width: 22px;
-      height: 1px;
-      background: var(--text-mid);
-      transition: all 0.3s;
-    }
-
-    /* ─── HERO ─── */
-    #hero {
-      padding: 100px 0 80px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .hero-eyebrow {
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 28px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .hero-eyebrow::before {
-      content: '';
-      display: inline-block;
-      width: 32px;
-      height: 1px;
-      background: var(--gold-dim);
-    }
-
-    .hero-heading {
-      font-family: var(--serif);
-      font-size: clamp(48px, 7vw, 76px);
-      font-weight: 300;
-      color: var(--text-hi);
-      line-height: 1.05;
-      letter-spacing: -0.01em;
-      margin-bottom: 32px;
-    }
-
-    .hero-heading em {
-      font-style: italic;
-      color: var(--gold);
-    }
-
-    .hero-body {
-      font-size: 16px;
-      color: var(--text-mid);
-      max-width: 520px;
-      line-height: 1.85;
-      margin-bottom: 48px;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .btn-primary {
-      background: var(--gold);
-      color: #0d0d0c;
-      padding: 12px 28px;
-      font-family: var(--sans);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border-radius: 2px;
-      transition: opacity 0.2s;
-      display: inline-block;
-    }
-    .btn-primary:hover { opacity: 0.85; }
-
-    .btn-ghost {
-      color: var(--text-mid);
-      padding: 12px 28px;
-      font-family: var(--sans);
-      font-size: 11px;
-      font-weight: 400;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border: 1px solid var(--border-mid);
-      border-radius: 2px;
-      transition: all 0.2s;
-      display: inline-block;
-    }
-    .btn-ghost:hover { border-color: var(--text-mid); color: var(--text-hi); }
-
-    .hero-stats {
-      display: flex;
-      gap: 48px;
-      margin-top: 64px;
-      padding-top: 40px;
-      border-top: 1px solid var(--border);
-      flex-wrap: wrap;
-    }
-
-    .stat-num {
-      font-family: var(--serif);
-      font-size: 36px;
-      font-weight: 300;
-      color: var(--text-hi);
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-
-    .stat-label {
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-lo);
-    }
-
-    /* ─── SECTION SCAFFOLD ─── */
-    .section {
-      padding: 80px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .section-label {
-      font-size: 10px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-lo);
-      margin-bottom: 48px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    .section-heading {
-      font-family: var(--serif);
-      font-size: clamp(30px, 4vw, 44px);
-      font-weight: 300;
-      color: var(--text-hi);
-      line-height: 1.2;
-      margin-bottom: 28px;
-    }
-
-    /* ─── ABOUT ─── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: start;
-    }
-
-    .about-text {
-      font-size: 16px;
-      line-height: 1.9;
-      color: var(--text-mid);
-    }
-
-    .about-text p + p { margin-top: 20px; }
-
-    .about-text strong {
-      color: var(--text-hi);
-      font-weight: 400;
-    }
-
-    .about-image-wrap {
-      position: relative;
-    }
-
-    .about-image-wrap img {
-      width: 100%;
-      aspect-ratio: 3/4;
-      object-fit: cover;
-      border-radius: 2px;
-      filter: grayscale(30%) contrast(1.05);
-      display: block;
-    }
-
-    .about-image-wrap::after {
-      content: '';
-      position: absolute;
-      inset: 12px -12px -12px 12px;
-      border: 1px solid var(--border-mid);
-      border-radius: 2px;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    /* ─── SKILLS ─── */
-    .skills-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0 64px;
-    }
-
-    .skill-category {
-      margin-bottom: 40px;
-    }
-
-    .skill-cat-title {
-      font-size: 10px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--gold-dim);
-      margin-bottom: 20px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .skill-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .skill-row:last-child { border-bottom: none; }
-
-    .skill-name {
-      font-size: 14px;
-      color: var(--text-mid);
-    }
-
-    .skill-badge {
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gold);
-      background: rgba(184,169,106,0.08);
-      padding: 3px 10px;
-      border-radius: 2px;
-    }
-
-    /* ─── EXPERIENCE ─── */
-    .exp-block {
-      border-left: 1px solid var(--border-mid);
-      padding-left: 28px;
-      margin-bottom: 48px;
-      position: relative;
-    }
-    .exp-block::before {
-      content: '';
-      position: absolute;
-      left: -4px;
-      top: 6px;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--gold);
-    }
-
-    .exp-role {
-      font-family: var(--serif);
-      font-size: 22px;
-      font-weight: 400;
-      color: var(--text-hi);
-      margin-bottom: 4px;
-    }
-
-    .exp-meta {
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gold-dim);
-      margin-bottom: 16px;
-    }
-
-    .exp-desc {
-      font-size: 15px;
-      line-height: 1.85;
-      color: var(--text-mid);
-      max-width: 580px;
-    }
-
-    .exp-skills-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 20px;
-    }
-
-    .exp-tag {
-      font-size: 11px;
-      letter-spacing: 0.06em;
-      color: var(--text-lo);
-      border: 1px solid var(--border);
-      padding: 4px 12px;
-      border-radius: 2px;
-    }
-
-    /* ─── CERTIFICATES ─── */
-    .certs-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .cert-card {
-      background: var(--bg-2);
-      padding: 28px 24px;
-      transition: background 0.2s;
-      cursor: default;
-    }
-    .cert-card:hover { background: var(--bg-3); }
-
-    .cert-img {
-      width: 100%;
-      aspect-ratio: 16/10;
-      object-fit: cover;
-      border-radius: 2px;
-      margin-bottom: 16px;
-      filter: grayscale(20%);
-      display: block;
-    }
-
-    .cert-issuer {
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 8px;
-    }
-
-    .cert-name {
-      font-size: 14px;
-      color: var(--text-mid);
-      line-height: 1.5;
-    }
-
-    /* ─── CONTACT ─── */
-    #contact {
-      padding: 100px 0;
-    }
-
-    .contact-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: start;
-    }
-
-    .contact-left .section-heading {
-      margin-bottom: 16px;
-    }
-
-    .contact-subtext {
-      font-size: 15px;
-      color: var(--text-mid);
-      line-height: 1.8;
-      margin-bottom: 36px;
-    }
-
-    .contact-detail {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .contact-item {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-
-    .contact-item-label {
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--text-lo);
-    }
-
-    .contact-item-value {
-      font-size: 14px;
-      color: var(--text-mid);
-    }
-    .contact-item-value a {
-      color: var(--text-mid);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .contact-item-value a:hover { color: var(--gold); }
-
-    /* ─── FORM ─── */
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .form-group label {
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--text-lo);
-    }
-
-    .form-group input,
-    .form-group textarea {
-      background: var(--bg-2);
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      padding: 12px 16px;
-      font-family: var(--sans);
-      font-size: 14px;
-      font-weight: 300;
-      color: var(--text-hi);
-      outline: none;
-      transition: border-color 0.2s;
-      width: 100%;
-    }
-
-    .form-group input::placeholder,
-    .form-group textarea::placeholder {
-      color: var(--text-lo);
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      border-color: var(--gold-dim);
-    }
-
-    .form-group textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-
-    .form-submit {
-      background: var(--gold);
-      color: #0d0d0c;
-      border: none;
-      padding: 13px 28px;
-      font-family: var(--sans);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      border-radius: 2px;
-      cursor: pointer;
-      align-self: flex-start;
-      transition: opacity 0.2s;
-    }
-    .form-submit:hover { opacity: 0.85; }
-
-    /* ─── FOOTER ─── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 32px 0;
-    }
-
-    footer .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .footer-copy {
-      font-size: 12px;
-      color: var(--text-lo);
-    }
-
-    .footer-socials {
-      display: flex;
-      gap: 20px;
-    }
-
-    .footer-socials a {
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-lo);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .footer-socials a:hover { color: var(--gold); }
-
-    /* ─── ANIMATIONS ─── */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 768px) {
-      .container { padding: 0 20px; }
-
-      nav .container { height: 56px; }
-
-      .nav-links, .nav-cta { display: none; }
-      .nav-links.open { display: flex; flex-direction: column; gap: 0; }
-
-      .nav-toggle { display: flex; }
-
-      /* mobile nav dropdown */
-      nav { position: relative; }
-      .nav-mobile-menu {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: rgba(13,13,12,0.97);
-        border-bottom: 1px solid var(--border);
-        padding: 20px 24px 28px;
-        z-index: 200;
-        flex-direction: column;
-        gap: 0;
-      }
-      .nav-mobile-menu.open { display: flex; }
-      .nav-mobile-menu a {
-        font-size: 13px;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--text-mid);
-        text-decoration: none;
-        padding: 14px 0;
-        border-bottom: 1px solid var(--border);
-      }
-      .nav-mobile-menu a:last-child { border-bottom: none; }
-
-      #hero { padding: 64px 0 56px; }
-      .hero-stats { gap: 32px; }
-
-      .about-grid { grid-template-columns: 1fr; gap: 40px; }
-      .about-image-wrap { display: none; }
-
-      .skills-layout { grid-template-columns: 1fr; gap: 0; }
-
-      .certs-grid { grid-template-columns: 1fr; }
-
-      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
-
-      .section { padding: 56px 0; }
-    }
+   
   </style>
 </head>
-
 <body>
 
-  <!-- ═══════════════════ NAV ═══════════════════ -->
+  <!-- ════════════ NAV ════════════ -->
   <nav>
     <div class="container">
-      <a href="#hero" class="nav-logo">Mark Louei Joven</a>
+      <a href="#hero" class="nav-logo">
+        <span class="logo-bracket">[</span>MLJ<span class="logo-bracket">]</span>
+      </a>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#experience">Experience</a></li>
-        <li><a href="#certificates">Certificates</a></li>
+        <li><a href="#certificates">Certs</a></li>
       </ul>
       <a href="#contact" class="nav-cta">Contact</a>
       <button class="nav-toggle" aria-label="Toggle menu" onclick="toggleMenu()">
         <span></span><span></span><span></span>
       </button>
     </div>
+    <div class="nav-mobile-menu" id="mobileMenu">
+      <a href="#about" onclick="toggleMenu()">About</a>
+      <a href="#skills" onclick="toggleMenu()">Skills</a>
+      <a href="#experience" onclick="toggleMenu()">Experience</a>
+      <a href="#certificates" onclick="toggleMenu()">Certificates</a>
+      <a href="#contact" onclick="toggleMenu()">Contact</a>
+    </div>
   </nav>
 
-  <!-- ═══════════════════ HERO ═══════════════════ -->
+  <!-- ════════════ HERO ════════════ -->
   <section id="hero">
+    <div class="hero-corner-bl"></div>
     <div class="container">
-      <p class="hero-eyebrow fade-up">Available for Freelance Work</p>
+      <div class="hero-id fade-up">
+        <div class="hero-id-dot"></div>
+        <span>AGENT_ID :: MLJ-042 // STATUS: AVAILABLE_FOR_HIRE</span>
+      </div>
+
       <h1 class="hero-heading fade-up">
-        Hello, I'm<br>
-        <em>Mark Louei</em><br>
-        Joven.
+        <span class="outline" data-text="MARK">MARK</span>
+        <span class="accent glitch" data-text="LOUEI">LOUEI</span>
+        <span>JOVEN</span>
       </h1>
+
       <p class="hero-body fade-up">
-        Front End Developer &amp; Technical Support Specialist based in the Philippines.
-        I blend technology and creativity to build digital experiences that stand out.
+        Front End Developer &amp; Technical Support Specialist
+        based in the Philippines. Blending technology and creativity
+        to build digital experiences that stand out.
       </p>
+
       <div class="hero-actions fade-up">
-        <a href="#certificates" class="btn-primary">View My Work</a>
+        <a href="#certificates" class="btn-primary">View My Work →</a>
         <a href="#contact" class="btn-ghost">Get In Touch</a>
       </div>
+
       <div class="hero-stats fade-up">
-        <div>
-          <div class="stat-num">2<span style="font-size:22px;color:var(--gold)">yrs</span></div>
+        <div class="stat-item">
+          <div class="stat-num">2<span class="stat-unit">YRS</span></div>
           <div class="stat-label">Experience</div>
         </div>
-        <div>
-          <div class="stat-num">3<span style="font-size:22px;color:var(--gold)">+</span></div>
+        <div class="stat-item">
+          <div class="stat-num">3<span class="stat-unit">+</span></div>
           <div class="stat-label">Certificates</div>
         </div>
-        <div>
-          <div class="stat-num">L1<span style="font-size:16px;color:var(--gold)">–</span>L2</div>
+        <div class="stat-item">
+          <div class="stat-num">L<span class="stat-unit">1–2</span></div>
           <div class="stat-label">Support Level</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════ ABOUT ═══════════════════ -->
+  <!-- ════════════ ABOUT ════════════ -->
   <section id="about" class="section">
+    <div class="section-num">01</div>
     <div class="container">
-      <div class="section-label">About</div>
+      <div class="section-tag fade-up">About</div>
+      <h2 class="section-heading fade-up">
+        Crafting <span class="hl">Solutions</span><br>With Purpose
+      </h2>
+
       <div class="about-grid">
         <div>
-          <h2 class="section-heading fade-up">
-            Passionate about<br>
-            <em style="font-style:italic;color:var(--gold)">crafting</em> solutions.
-          </h2>
           <div class="about-text fade-up">
             <p>
               I'm a passionate <strong>front end web developer and technical support specialist</strong>
-              with experience in creating efficient, user-friendly solutions. I enjoy blending technology
-              and creativity to build digital experiences that stand out.
+              with experience in creating efficient, user-friendly solutions. I enjoy blending
+              technology and creativity to build digital experiences that stand out.
             </p>
             <p>
               Skilled in HTML, CSS, JavaScript, and troubleshooting — I'm always eager to learn
@@ -760,88 +107,100 @@
             </p>
           </div>
         </div>
-        <div class="about-image-wrap fade-up">
-          <img
-            src="https://krouei42.github.io/Portfolio_Louei/img/jpeg/lappy.jpeg"
-            alt="Mark Louei Joven"
-          />
+
+        <div class="about-image-panel fade-up">
+          <div class="about-corner about-corner-tl"></div>
+          <div class="about-corner about-corner-br"></div>
+          <div class="about-image-frame">
+            <img
+              src="https://krouei42.github.io/Portfolio_Louei/img/jpeg/lappy.jpeg"
+              alt="Mark Louei Joven"
+            />
+          </div>
+          <div class="about-id-tag">// AGENT_PHOTO :: VERIFIED</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════ SKILLS ═══════════════════ -->
+  <!-- ════════════ SKILLS ════════════ -->
   <section id="skills" class="section">
+    <div class="section-num">02</div>
     <div class="container">
-      <div class="section-label">Skills</div>
-      <h2 class="section-heading fade-up">Core Competencies</h2>
-      <div class="skills-layout">
+      <div class="section-tag fade-up">Skills</div>
+      <h2 class="section-heading fade-up">Core <span class="hl">Competencies</span></h2>
 
-        <div>
-          <div class="skill-category fade-up">
-            <div class="skill-cat-title">Front End Development</div>
-            <div class="skill-row">
-              <span class="skill-name">HTML5</span>
-              <span class="skill-badge">Expert</span>
-            </div>
-            <div class="skill-row">
-              <span class="skill-name">CSS3 / Bootstrap</span>
-              <span class="skill-badge">Expert</span>
-            </div>
-            <div class="skill-row">
-              <span class="skill-name">JavaScript</span>
-              <span class="skill-badge">Advanced</span>
-            </div>
+      <div class="skills-grid fade-up">
+
+        <div class="skill-panel">
+          <div class="skill-cat-title">Front End Dev</div>
+          <div class="skill-row">
+            <span class="skill-name">HTML5</span>
+            <span class="skill-badge">Expert</span>
           </div>
-
-          <div class="skill-category fade-up">
-            <div class="skill-cat-title">Cloud &amp; Databases</div>
-            <div class="skill-row">
-              <span class="skill-name">Azure</span>
-              <span class="skill-badge">Intermediate</span>
-            </div>
-            <div class="skill-row">
-              <span class="skill-name">Google Cloud</span>
-              <span class="skill-badge">Intermediate</span>
-            </div>
-            <div class="skill-row">
-              <span class="skill-name">MySQL / SQL Server</span>
-              <span class="skill-badge">Intermediate</span>
-            </div>
+          <div class="skill-row">
+            <span class="skill-name">CSS3 / Bootstrap</span>
+            <span class="skill-badge">Expert</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">JavaScript</span>
+            <span class="skill-badge">Advanced</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">React.js</span>
+            <span class="skill-badge">Intermediate</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">Figma</span>
+            <span class="skill-badge">Advanced</span>
           </div>
         </div>
 
-        <div>
-          <div class="skill-category fade-up">
-            <div class="skill-cat-title">Technical Support</div>
-            <div class="skill-row">
-              <span class="skill-name">Hardware &amp; Software Troubleshooting</span>
-              <span class="skill-badge">Expert</span>
-            </div>
-            <div class="skill-row">
-              <span class="skill-name">Windows &amp; Linux Support</span>
-              <span class="skill-badge">Expert</span>
-            </div>
-            <div class="skill-row">
-              <span class="skill-name">Office 365 &amp; Enterprise Apps</span>
-              <span class="skill-badge">Expert</span>
-            </div>
+        <div class="skill-panel">
+          <div class="skill-cat-title">Cloud &amp; Databases</div>
+          <div class="skill-row">
+            <span class="skill-name">Azure</span>
+            <span class="skill-badge">Intermediate</span>
           </div>
+          <div class="skill-row">
+            <span class="skill-name">Google Cloud</span>
+            <span class="skill-badge">Intermediate</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">MySQL / SQL Server</span>
+            <span class="skill-badge">Intermediate</span>
+          </div>
+        </div>
 
-          <div class="skill-category fade-up">
-            <div class="skill-cat-title">Networking &amp; Security</div>
-            <div class="skill-row">
-              <span class="skill-name">IP / DHCP / LAN / VLAN / WAN</span>
-              <span class="skill-badge">Advanced</span>
-            </div>
-            <div class="skill-row">
-              <span class="skill-name">Security Monitoring</span>
-              <span class="skill-badge">Advanced</span>
-            </div>
-            <div class="skill-row">
-              <span class="skill-name">JIRA Ticketing</span>
-              <span class="skill-badge">Advanced</span>
-            </div>
+        <div class="skill-panel">
+          <div class="skill-cat-title">Technical Support</div>
+          <div class="skill-row">
+            <span class="skill-name">Hardware &amp; Software Troubleshooting</span>
+            <span class="skill-badge">Expert</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">Windows &amp; Linux Support</span>
+            <span class="skill-badge">Expert</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">Office 365 &amp; Enterprise Apps</span>
+            <span class="skill-badge">Expert</span>
+          </div>
+        </div>
+
+        <div class="skill-panel">
+          <div class="skill-cat-title">Networking &amp; Security</div>
+          <div class="skill-row">
+            <span class="skill-name">IP / DHCP / LAN / VLAN / WAN</span>
+            <span class="skill-badge">Advanced</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">Security Monitoring</span>
+            <span class="skill-badge">Advanced</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-name">JIRA Ticketing</span>
+            <span class="skill-badge">Advanced</span>
           </div>
         </div>
 
@@ -849,90 +208,106 @@
     </div>
   </section>
 
-  <!-- ═══════════════════ EXPERIENCE ═══════════════════ -->
+  <!-- ════════════ EXPERIENCE ════════════ -->
   <section id="experience" class="section">
+    <div class="section-num">03</div>
     <div class="container">
-      <div class="section-label">Experience</div>
-      <h2 class="section-heading fade-up">Where I've Worked</h2>
+      <div class="section-tag fade-up">Experience</div>
+      <h2 class="section-heading fade-up">Where I've <span class="hl">Worked</span></h2>
 
-      <div class="exp-block fade-up">
-        <div class="exp-role">Technical Support Specialist</div>
-        <div class="exp-meta">Level 1 &amp; Level 2 &nbsp;·&nbsp; IT Industry &nbsp;·&nbsp; ~2 Years</div>
-        <p class="exp-desc">
-          Accomplished Technical Support Specialist with nearly 2 years of hands-on experience in the IT and
-          technical support industry. Specialized in troubleshooting, system analysis, and customer support,
-          ensuring fast and accurate resolution of technical issues.
-        </p>
-        <p class="exp-desc" style="margin-top:14px;">
-          Confident working both independently and collaboratively — assisting end users, handling project
-          implementations, and supporting system operations. Committed to continuous learning and providing
-          reliable technical service.
-        </p>
-        <div class="exp-skills-list">
-          <span class="exp-tag">Troubleshooting</span>
-          <span class="exp-tag">System Analysis</span>
-          <span class="exp-tag">Customer Support</span>
-          <span class="exp-tag">Windows &amp; Linux</span>
-          <span class="exp-tag">Network Support</span>
-          <span class="exp-tag">JIRA</span>
-          <span class="exp-tag">Office 365</span>
-          <span class="exp-tag">Azure</span>
-          <span class="exp-tag">Documentation</span>
-        </div>
-      </div>
+      <div class="exp-list">
 
-      <div class="exp-block fade-up">
-        <div class="exp-role">Front End Web Developer</div>
-        <div class="exp-meta">Freelance &nbsp;·&nbsp; Ongoing</div>
-        <p class="exp-desc">
-          Designing and building modern, responsive websites with a focus on clean code and user experience.
-          Skilled in HTML, CSS, JavaScript, and Bootstrap — bringing creative ideas to life in the browser.
-        </p>
-        <div class="exp-skills-list">
-          <span class="exp-tag">HTML5</span>
-          <span class="exp-tag">CSS3</span>
-          <span class="exp-tag">JavaScript</span>
-          <span class="exp-tag">Bootstrap</span>
-          <span class="exp-tag">Responsive Design</span>
-          <span class="exp-tag">GitHub Pages</span>
+        <div class="exp-block fade-up">
+          <div class="exp-block-num">// RECORD_01</div>
+          <div class="exp-role">Technical Support Specialist</div>
+          <div class="exp-meta">Level 1 &amp; Level 2 &nbsp;·&nbsp; IT Industry &nbsp;·&nbsp; ~2 Years</div>
+          <p class="exp-desc">
+            Accomplished Technical Support Specialist with nearly 2 years of hands-on experience
+            in the IT and technical support industry. Specialized in troubleshooting, system
+            analysis, and customer support, ensuring fast and accurate resolution of technical issues.
+          </p>
+          <p class="exp-desc">
+            Confident working both independently and collaboratively — assisting end users, handling
+            project implementations, and supporting system operations. Committed to continuous learning
+            and providing reliable technical service.
+          </p>
+          <div class="exp-tags">
+            <span class="exp-tag">Troubleshooting</span>
+            <span class="exp-tag">System Analysis</span>
+            <span class="exp-tag">Customer Support</span>
+            <span class="exp-tag">Windows &amp; Linux</span>
+            <span class="exp-tag">Network Support</span>
+            <span class="exp-tag">JIRA</span>
+            <span class="exp-tag">Office 365</span>
+            <span class="exp-tag">Azure</span>
+            <span class="exp-tag">Documentation</span>
+          </div>
         </div>
+
+        <div class="exp-block fade-up">
+          <div class="exp-block-num">// RECORD_02</div>
+          <div class="exp-role">Front End Web Developer</div>
+          <div class="exp-meta">Freelance &nbsp;·&nbsp; Ongoing</div>
+          <p class="exp-desc">
+            Designing and building modern, responsive websites with a focus on clean code and user
+            experience. Skilled in HTML, CSS, JavaScript, and Bootstrap — bringing creative ideas
+            to life in the browser.
+          </p>
+          <div class="exp-tags">
+            <span class="exp-tag">HTML5</span>
+            <span class="exp-tag">CSS3</span>
+            <span class="exp-tag">JavaScript</span>
+            <span class="exp-tag">Bootstrap</span>
+            <span class="exp-tag">Responsive Design</span>
+            <span class="exp-tag">GitHub Pages</span>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════ CERTIFICATES ═══════════════════ -->
+  <!-- ════════════ CERTIFICATES ════════════ -->
   <section id="certificates" class="section">
+    <div class="section-num">04</div>
     <div class="container">
-      <div class="section-label">Certificates</div>
-      <h2 class="section-heading fade-up">Credentials &amp; Training</h2>
-      <div class="certs-grid">
+      <div class="section-tag fade-up">Certificates</div>
+      <h2 class="section-heading fade-up">Credentials &amp; <span class="hl">Training</span></h2>
 
-        <div class="cert-card fade-up">
-          <img
-            src="https://krouei42.github.io/Portfolio_Louei/img/png/google_course_foc.png"
-            alt="Google Foundations of Cybersecurity Certificate"
-            class="cert-img"
-          />
+      <div class="certs-grid fade-up">
+
+        <div class="cert-card">
+          <div class="cert-img-wrap">
+            <img
+              src="https://krouei42.github.io/Portfolio_Louei/img/png/google_course_foc.png"
+              alt="Google Foundations of Cybersecurity Certificate"
+              class="cert-img"
+            />
+          </div>
           <div class="cert-issuer">Google</div>
           <div class="cert-name">Foundations of Cybersecurity</div>
         </div>
 
-        <div class="cert-card fade-up">
-          <img
-            src="https://krouei42.github.io/Portfolio_Louei/img/png/google_course_pismsr.png"
-            alt="Google Play it Safe Manage Security Risks Certificate"
-            class="cert-img"
-          />
+        <div class="cert-card">
+          <div class="cert-img-wrap">
+            <img
+              src="https://krouei42.github.io/Portfolio_Louei/img/png/google_course_pismsr.png"
+              alt="Google Play it Safe Manage Security Risks Certificate"
+              class="cert-img"
+            />
+          </div>
           <div class="cert-issuer">Google</div>
           <div class="cert-name">Play it Safe: Manage Security Risks</div>
         </div>
 
-        <div class="cert-card fade-up">
-          <img
-            src="https://krouei42.github.io/Portfolio_Louei/img/png/packt_nfp.png"
-            alt="PACKT Network Fundamentals Certificate"
-            class="cert-img"
-          />
+        <div class="cert-card">
+          <div class="cert-img-wrap">
+            <img
+              src="https://krouei42.github.io/Portfolio_Louei/img/png/packt_nfp.png"
+              alt="PACKT Network Fundamentals Certificate"
+              class="cert-img"
+            />
+          </div>
           <div class="cert-issuer">PACKT</div>
           <div class="cert-name">Network Fundamentals and Physical Networks</div>
         </div>
@@ -941,16 +316,16 @@
     </div>
   </section>
 
-  <!-- ═══════════════════ CONTACT ═══════════════════ -->
+  <!-- ════════════ CONTACT ════════════ -->
   <section id="contact">
     <div class="container">
-      <div class="section-label">Contact</div>
+      <div class="section-tag fade-up">Contact</div>
       <div class="contact-inner">
 
         <div class="contact-left">
-          <h2 class="section-heading fade-up">
-            Ready to work<br>
-            <em style="font-style:italic;color:var(--gold)">together?</em>
+          <h2 class="contact-heading fade-up">
+            Ready to <span>Work</span><br>
+            <span style="color:var(--yellow)">Together?</span>
           </h2>
           <p class="contact-subtext fade-up">
             I'm open to freelance projects, collaborations, and full-time opportunities.
@@ -958,12 +333,31 @@
           </p>
           <div class="contact-detail fade-up">
             <div class="contact-item">
-              <span class="contact-item-label">Location</span>
-              <span class="contact-item-value">Philippines</span>
+              <div class="contact-item-icon">
+                <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              </div>
+              <div>
+                <div class="contact-item-label">Location</div>
+                <div class="contact-item-value">Philippines</div>
+              </div>
             </div>
             <div class="contact-item">
-              <span class="contact-item-label">Availability</span>
-              <span class="contact-item-value">Open to Freelance &amp; Full-time</span>
+              <div class="contact-item-icon">
+                <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <div>
+                <div class="contact-item-label">Availability</div>
+                <div class="contact-item-value">Open to Freelance &amp; Full-time</div>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-item-icon">
+                <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+              </div>
+              <div>
+                <div class="contact-item-label">GitHub</div>
+                <div class="contact-item-value"><a href="https://github.com/krouei42" target="_blank" rel="noopener">github.com/krouei42</a></div>
+              </div>
             </div>
           </div>
         </div>
@@ -981,14 +375,14 @@
             <label for="message">Message</label>
             <textarea id="message" name="message" placeholder="Tell me about your project..." required></textarea>
           </div>
-          <button type="submit" class="form-submit">Send Message →</button>
+          <button type="submit" class="form-submit">Transmit Message →</button>
         </form>
 
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <!-- ════════════ FOOTER ════════════ -->
   <footer>
     <div class="container">
       <span class="footer-copy">© 2025 Mark Louei Joven · All Rights Reserved</span>
@@ -1000,45 +394,9 @@
     </div>
   </footer>
 
-  <!-- ═══════════════════ SCRIPTS ═══════════════════ -->
-  <script>
-    /* ── Fade-up on scroll ── */
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  <!-- ════════════ SCRIPTS ════════════ -->
 
-    document.querySelectorAll('.fade-up').forEach((el, i) => {
-      el.style.transitionDelay = (i % 4) * 80 + 'ms';
-      observer.observe(el);
-    });
-
-    /* ── Mobile menu ── */
-    function toggleMenu() {
-      document.getElementById('mobileMenu').classList.toggle('open');
-    }
-
-    /* ── Form submit (basic feedback) ── */
-    function handleSubmit(e) {
-      e.preventDefault();
-      const btn = e.target.querySelector('.form-submit');
-      btn.textContent = 'Message Sent ✓';
-      btn.style.background = '#3a5a3a';
-      btn.style.color = '#a0d0a0';
-      btn.disabled = true;
-      setTimeout(() => {
-        btn.textContent = 'Send Message →';
-        btn.style.background = '';
-        btn.style.color = '';
-        btn.disabled = false;
-        e.target.reset();
-      }, 3000);
-    }
-  </script>
+<script src="scriptjs.js"></script>
 
 </body>
 </html>
